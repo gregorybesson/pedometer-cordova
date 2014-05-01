@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" id="fr.adfab.pedometercordova" version="1.O.O">
+
+    <engines>
+        <engine name="cordova" version=">=3.4.0" />
+    </engines>
+
+    <name>Pedometer Cordova</name>
+    <description>Plugin cordova using https://github.com/SocialObjects-Software/SOMotionDetector</description>
+    <author>Grégory Besson</author>
+    <license>MIT</license>
+    <keywords>pedometer,cordova,socialobjects,arturdev,DavidSahakyan</keywords>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+		    <feature name="PedometerCordova">
+		        <param name="ios-package" value="PedometerCordova" />
+		    </feature>
+        </config-file>
+
+        <header-file src="src/ios/SOLocationManager.h" />
+        <source-file src="src/ios/SOLocationManager.m" />
+        <header-file src="src/ios/SOMotionDetector.h" />
+        <source-file src="src/ios/SOMotionDetector.m" />
+
+        <framework src="CoreLocation.framework" weak="true" />
+        <framework src="CoreMotion.framework" weak="true" />
+
+		<!-- android specific notification apis -->
+		<js-module src="www/PedometerCordova.js" name="PedometerCordova">
+			<clobbers target="window.PedometerCordova" />
+		</js-module>
+    </platform>
+
+</plugin>
