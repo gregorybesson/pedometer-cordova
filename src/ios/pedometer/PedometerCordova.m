@@ -53,22 +53,52 @@
     NSLog(@"stop");
 }
 
-#pragma mark - SOLocationManager Delegate -
-- (BOOL)didReceiveResponse:(NSData *)data
+#pragma mark - MotionDetector Delegate
+- (void)motionDetector:(SOMotionDetector *)motionDetector motionTypeChanged:(SOMotionType)motionType
 {
-    NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *type = @"";
+    switch (motionType) {
+        case MotionTypeNotMoving:
+            type = @"Not moving";
+            break;
+        case MotionTypeWalking:
+            type = @"Walking";
+            break;
+        case MotionTypeRunning:
+            type = @"Running";
+            break;
+        case MotionTypeAutomotive:
+            type = @"Automotive";
+            break;
+    }
+    
+    NSString *responseString = type;
+    NSLog(@"responseString: %@", type);
+    
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:responseString];
+    [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
+    [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
+}
+
+- (void)motionDetector:(SOMotionDetector *)motionDetector locationChanged:(CLLocation *)location
+{
+
+    NSString *responseString = [NSString stringWithFormat:@"%.2f km/h",motionDetector.currentSpeed * 3.6f];
     NSLog(@"responseString: %@", responseString);
     
     pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:responseString];
     [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-    
-    return YES;
 }
 
-- (void)showLoadingView
+- (void)motionDetector:(SOMotionDetector *)motionDetector accelerationChanged:(CMAcceleration)acceleration
 {
-    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"showLoadingView"];
+    BOOL isShaking = motionDetector.isShaking;
+    
+    NSString *responseString = isShaking ? @"shaking":@"not shaking";
+    NSLog(@"responseString: %@", responseString);
+    
+    pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:responseString];
     [pluginResult setKeepCallback:[NSNumber numberWithBool:YES]];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
 }
