@@ -17,8 +17,8 @@
     
     callbackId = command.callbackId;
     
-    self.pedometerCordovaObj = [[SoLocationManager alloc] init];
-    [self.pedometerCordovaObj setDelegate:self];
+    self.solocationObj = [[SoLocationManager alloc] init];
+    [self.solocationObj setDelegate:self];
     
     [self.commandDelegate runInBackground:^{
         
@@ -35,12 +35,12 @@
 }
 
 - (void) start {
-    [self.pedometerCordovaObj start];
+    [self.solocationObj start];
     NSLog(@"start");
 }
 
 
-- (void)stopRecording:(CDVInvokedUrlCommand*)command
+- (void)stop:(CDVInvokedUrlCommand*)command
 {
     [self stop];
     [self.commandDelegate runInBackground:^{
@@ -48,8 +48,8 @@
     }];
 }
 
-- (void) stopRecording {
-    [self.pedometerCordovaObj stop];
+- (void) stop {
+    [self.solocationObj stop];
     NSLog(@"stop");
 }
 
