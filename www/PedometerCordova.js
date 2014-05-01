@@ -17,7 +17,7 @@ var PedometerCordova = {
         );
     },
         
-    record: function(str, callback)
+    start: function(str, callback)
     {
         cordova.exec(
             function(data)
@@ -34,7 +34,7 @@ var PedometerCordova = {
         );
     },
     
-    stopRecording: function(str, callback)
+    stop: function(str, callback)
     {
         cordova.exec(
             function(data)

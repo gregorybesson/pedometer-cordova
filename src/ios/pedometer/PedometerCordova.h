@@ -10,7 +10,7 @@
 #import "SOLocationManager.h"
 #import "SOMotionDetector.h"
 
-@interface PedometerCordova : CDVPlugin<SOLocationManagerDelegate> {
+@interface PedometerCordova : CDVPlugin<SOMotionDetectorDelegate> {
     
     // PHONEGAP
     NSString *callbackId;
@@ -20,7 +20,7 @@
     NSThread *thread;
 }
 
-@property(nonatomic, strong)SOLocationManager *solocationObj;
+@property(nonatomic, strong)SOMotionDetector *somotionObj;
 
 - (void) init:(CDVInvokedUrlCommand*)command;
 - (void) start:(CDVInvokedUrlCommand*)command;

@@ -60,6 +60,7 @@ CGFloat kMinimumRunningAcceleration = 3.5f;
 
 - (id)init
 {
+    NSLog(@"motion init");
     self = [super init];
     if (self)
     {
@@ -165,6 +166,8 @@ CGFloat kMinimumRunningAcceleration = 3.5f;
 #pragma mark - Private Methods
 - (void)calculateMotionType
 {
+    NSLog(@"Current speed : %f", _currentSpeed);
+    
     if (self.useM7IfAvailable && [CMMotionActivityManager isActivityAvailable])
     {
         return;

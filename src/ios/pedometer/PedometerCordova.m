@@ -17,8 +17,8 @@
     
     callbackId = command.callbackId;
     
-    self.solocationObj = [[SOLocationManager alloc] init];
-    [self.solocationObj setDelegate:self];
+    self.somotionObj = [[SOMotionDetector alloc] init];
+    [SOMotionDetector sharedInstance].delegate = self;
     
     [self.commandDelegate runInBackground:^{
         
@@ -35,7 +35,7 @@
 }
 
 - (void) start {
-    [self.solocationObj start];
+    [self.somotionObj startDetection];
     NSLog(@"start");
 }
 
@@ -49,7 +49,7 @@
 }
 
 - (void) stop {
-    [self.solocationObj stop];
+    [self.somotionObj stopDetection];
     NSLog(@"stop");
 }
 
