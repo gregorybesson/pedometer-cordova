@@ -22,7 +22,7 @@
 
 @property(nonatomic, strong)SOLocationManager *solocationObj;
 
-- (void)init:(CDVInvokedUrlCommand*)command;
+- (void) init:(CDVInvokedUrlCommand*)command;
 - (void) start:(CDVInvokedUrlCommand*)command;
 - (void) start;
 - (void) stop:(CDVInvokedUrlCommand*)command;

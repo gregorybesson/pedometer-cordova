@@ -1,4 +1,5 @@
 var PedometerCordova = {
+
     init: function(str, callback)
     {
         cordova.exec(
@@ -15,7 +16,7 @@ var PedometerCordova = {
             []
         );
     },
-
+        
     record: function(str, callback)
     {
         cordova.exec(

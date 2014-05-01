@@ -1,15 +1,15 @@
 //
-//  SpeechToTextPhonegap.m
-//  text-speech-cordova
+//  PedometerCordova.m
+//  pedometer-cordova
 //
-//  Created by nicolas labbé on 12/04/2014.
+//  Created by Grégory Besson on 01 May 2014.
 //
 //
 
-#import "SpeechToTextPhonegap.h"
+#import "PedometerCordova.h"
 #import <Cordova/CDV.h>
 
-@implementation SpeechToTextPhonegap
+@implementation PedometerCordova
 
 - (void)init:(CDVInvokedUrlCommand*)command
 {
@@ -17,8 +17,8 @@
     
     callbackId = command.callbackId;
     
-    self.speechToTextObj = [[SpeechToTextModule alloc] init];
-    [self.speechToTextObj setDelegate:self];
+    self.pedometerCordovaObj = [[SoLocationManager alloc] init];
+    [self.pedometerCordovaObj setDelegate:self];
     
     [self.commandDelegate runInBackground:^{
         
@@ -26,35 +26,35 @@
     }];
 }
 
-- (void)record:(CDVInvokedUrlCommand*)command
+- (void)start:(CDVInvokedUrlCommand*)command
 {
-    [self record];
+    [self start];
     [self.commandDelegate runInBackground:^{
-        //[self record];
+        //[self start];
     }];
 }
 
-- (void) record {
-    [self.speechToTextObj beginRecording];
-    NSLog(@"record");
+- (void) start {
+    [self.pedometerCordovaObj start];
+    NSLog(@"start");
 }
 
 
 - (void)stopRecording:(CDVInvokedUrlCommand*)command
 {
-    [self stopRecording];
+    [self stop];
     [self.commandDelegate runInBackground:^{
-        //[self stopRecording];
+        //[self stop];
     }];
 }
 
 - (void) stopRecording {
-    [self.speechToTextObj stopRecording:YES];
+    [self.pedometerCordovaObj stop];
     NSLog(@"stop");
 }
 
-#pragma mark - SpeechToTextModule Delegate -
-- (BOOL)didReceiveVoiceResponse:(NSData *)data
+#pragma mark - SOLocationManager Delegate -
+- (BOOL)didReceiveResponse:(NSData *)data
 {
     NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"responseString: %@", responseString);
