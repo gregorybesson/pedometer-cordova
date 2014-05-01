@@ -5,7 +5,7 @@ var PedometerCordova = {
         cordova.exec(
             function(data)
             {
-                callback(JSON.parse(data));
+                callback(data);
             },
             function(err)
             {
@@ -22,7 +22,7 @@ var PedometerCordova = {
         cordova.exec(
             function(data)
             {
-                callback(JSON.parse(data));
+                callback(data);
             },
             function(err)
             {
@@ -39,7 +39,7 @@ var PedometerCordova = {
         cordova.exec(
             function(data)
             {
-                callback(JSON.parse(data));
+                callback(data);
             },
             function(err)
             {
