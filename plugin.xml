@@ -18,10 +18,12 @@
 		    </feature>
         </config-file>
 
-        <header-file src="src/ios/SOLocationManager.h" />
-        <source-file src="src/ios/SOLocationManager.m" />
-        <header-file src="src/ios/SOMotionDetector.h" />
-        <source-file src="src/ios/SOMotionDetector.m" />
+        <header-file src="src/ios/pedometer/SOLocationManager.h" />
+        <source-file src="src/ios/pedometer/SOLocationManager.m" />
+        <header-file src="src/ios/pedometer/SOMotionDetector.h" />
+        <source-file src="src/ios/pedometer/SOMotionDetector.m" />
+        <header-file src="src/ios/pedometer/PedometerCordova.h" />
+        <source-file src="src/ios/pedometer/PedometerCordova.m" />
 
         <framework src="CoreLocation.framework" weak="true" />
         <framework src="CoreMotion.framework" weak="true" />
