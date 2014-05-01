@@ -17,7 +17,7 @@
     
     callbackId = command.callbackId;
     
-    self.solocationObj = [[SoLocationManager alloc] init];
+    self.solocationObj = [[SOLocationManager alloc] init];
     [self.solocationObj setDelegate:self];
     
     [self.commandDelegate runInBackground:^{
