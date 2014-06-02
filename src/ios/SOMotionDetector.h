@@ -31,10 +31,11 @@
 @class SOMotionDetector;
 typedef enum
 {
-  MotionTypeNotMoving = 1,
-  MotionTypeWalking,
-  MotionTypeRunning,
-  MotionTypeAutomotive
+    MotionTypeNotMoving = 1,
+    MotionTypeWalking,
+    MotionTypeRunning,
+    MotionTypeSprinting,
+    MotionTypeAutomotive
 } SOMotionType;
 
 @protocol SOMotionDetectorDelegate <NSObject>

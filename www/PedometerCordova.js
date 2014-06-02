@@ -13,7 +13,7 @@ var PedometerCordova = {
             },
             "PedometerCordova",
             "init",
-            []
+            [] // option : "debug", 0.5
         );
     },
         

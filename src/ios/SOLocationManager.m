@@ -81,7 +81,7 @@
 - (void)stopSignificant
 {
     [self.locationManager stopMonitoringSignificantLocationChanges];
-
+    
     if (self.locationType & LocationManagerTypeStandart)
     {
         //leave only significant

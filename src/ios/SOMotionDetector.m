@@ -27,8 +27,9 @@
 #import "SOMotionDetector.h"
 
 CGFloat kMinimumSpeed        = 0.3f;
-CGFloat kMaximumWalkingSpeed = 1.9f;
-CGFloat kMaximumRunningSpeed = 7.5f;
+CGFloat kMaximumWalkingSpeed = 2.8f;
+CGFloat kMaximumRunningSpeed = 5.5f;
+CGFloat kMinimumSprintingSpeed = 8.0f;
 CGFloat kMinimumRunningAcceleration = 3.5f;
 
 @interface SOMotionDetector()
@@ -108,10 +109,10 @@ CGFloat kMinimumRunningAcceleration = 3.5f;
                 {
                     _motionType = MotionTypeRunning;
                 }
-                else if (activity.automotive)
-                {
-                    _motionType = MotionTypeAutomotive;
-                }
+                /*else if (activity.)
+                 {
+                 _motionType = MotionTypeSprinting;
+                 }*/
                 else if (activity.stationary || activity.unknown)
                 {
                     _motionType = MotionTypeNotMoving;
@@ -128,7 +129,7 @@ CGFloat kMinimumRunningAcceleration = 3.5f;
                     }
                 }
             });
-
+            
         }];
     }
 }
@@ -166,28 +167,45 @@ CGFloat kMinimumRunningAcceleration = 3.5f;
 #pragma mark - Private Methods
 - (void)calculateMotionType
 {
-    NSLog(@"Current speed : %f", _currentSpeed);
+    //NSLog(@"Current speed : %f", _currentSpeed);
     
     if (self.useM7IfAvailable && [CMMotionActivityManager isActivityAvailable])
     {
         return;
     }
-    
+    /*
+     if (_currentSpeed < kMinimumSpeed)
+     {
+     _motionType = MotionTypeNotMoving;
+     }
+     else if (_currentSpeed <= kMaximumWalkingSpeed)
+     {
+     _motionType = _isShaking ? MotionTypeRunning : MotionTypeWalking;
+     }
+     else if (_currentSpeed <= kMaximumRunningSpeed)
+     {
+     _motionType = _isShaking ? MotionTypeRunning : MotionTypeAutomotive;
+     }
+     else
+     {
+     _motionType = MotionTypeAutomotive;
+     }
+     */
     if (_currentSpeed < kMinimumSpeed)
     {
         _motionType = MotionTypeNotMoving;
     }
     else if (_currentSpeed <= kMaximumWalkingSpeed)
     {
-        _motionType = _isShaking ? MotionTypeRunning : MotionTypeWalking;
+        _motionType = MotionTypeWalking;
     }
     else if (_currentSpeed <= kMaximumRunningSpeed)
     {
-        _motionType = _isShaking ? MotionTypeRunning : MotionTypeAutomotive;
+        _motionType = MotionTypeRunning;
     }
     else
     {
-        _motionType = MotionTypeAutomotive;
+        _motionType = MotionTypeSprinting;
     }
     
     // If type was changed, then call delegate method
@@ -230,7 +248,7 @@ CGFloat kMinimumRunningAcceleration = 3.5f;
         for (NSValue *boxedAcceleration in shakeDataForOneSec) {
             CMAcceleration acceleration;
             [boxedAcceleration getValue:&acceleration];
-         
+            
             /*********************************
              *       Detecting shaking
              *********************************/
@@ -267,7 +285,7 @@ CGFloat kMinimumRunningAcceleration = 3.5f;
             [self.delegate motionDetector:self locationChanged:self.currentLocation];
         }
     });
-
+    
     [self calculateMotionType];
 }
 @end
