@@ -15,7 +15,12 @@
     // PHONEGAP
     NSString *callbackId;
     CDVPluginResult* pluginResult;
-    
+    // ENVIRONNEMENT SETTING
+    NSString *environnement;
+    BOOL autoWalk;
+    NSTimer *timer;
+    double counterWalk;
+    double incrementCounterWalk;
     // UTIL
     NSThread *thread;
 }
@@ -27,5 +32,6 @@
 - (void) start;
 - (void) stop:(CDVInvokedUrlCommand*)command;
 - (void) stop;
+- (void) autoWalk:(BOOL)toggle;
 
 @end
