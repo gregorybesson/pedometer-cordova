@@ -19,7 +19,7 @@ Make sure you have the plugins files and CoreMotion and CoreLocation framework a
 Init with callback function
 
 ```
-window.PedometerCordova.init(function(data)
+window.PedometerCordova.init('', function(data)
 {
     console.log(JSON.stringify(data));
 });
